@@ -4,7 +4,7 @@ export const vehicleApi = createApi({
   
     reducerPath: 'vehicleApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://a5e5-88-236-117-74.ngrok-free.app/api/',
+        baseUrl: 'https://d8d3-5-176-236-148.ngrok-free.app/api/',
     }),
     endpoints:(builder)=>({
         GetAllVehicle:builder.query({
@@ -33,9 +33,9 @@ export const vehicleApi = createApi({
                 body:model.VehicleModel
             })
         }),
-        GetVehicleByVehicleId:builder.query({
+        GetVehiclesByVehicleId:builder.query({
             query:(vehicleId)=>({
-                url:`Vehicle/GetVehicleByVehicleId/${vehicleId}`,
+                url:`Vehicle/GetVehiclesByVehicleId/${vehicleId}`,
                 method:'GET'
             })
         }),
@@ -43,5 +43,5 @@ export const vehicleApi = createApi({
     })
 })
 
-export const {useGetAllVehicleQuery,useCreateVehicleMutation,useRemoveVehicleMutation,useUpdateVehicleMutation,useGetVehicleByVehicleIdQuery}=vehicleApi 
+export const {useGetAllVehicleQuery,useCreateVehicleMutation,useRemoveVehicleMutation,useUpdateVehicleMutation,useGetVehiclesByVehicleIdQuery}=vehicleApi 
 export default vehicleApi

@@ -10,13 +10,14 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  useEffect(()=>{
-    auth.onAuthStateChanged(user=>{
-      if(user){
-        navigation.navigate('Customer');
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        navigation.navigate('Customer', { email: user.email })
       }
-    })
-  },[])
+    });
+    return unsubscribe;
+  }, []);
 
   const handleLogin = () => {
     auth.signInWithEmailAndPassword(email, password).
@@ -47,6 +48,7 @@ export default function LoginScreen() {
     </View>
    </KeyboardAvoidingView>
    </ImageBackground>
+   
   )
 }
 

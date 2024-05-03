@@ -4,43 +4,43 @@ export const categoryApi = createApi({
   
     reducerPath: 'categoryApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://a5e5-88-236-117-74.ngrok-free.app/api/',
+        baseUrl: 'https://d8d3-5-176-236-148.ngrok-free.app/api/',
     }),
     endpoints:(builder)=>({
         GetAllCategory:builder.query({
             query:()=>({
-                url:'Category',
+                url:'Category/GetAllCategory',
                 method:'GET'
             })
         }),
         CreateCategory:builder.mutation({
             query:(categoryModel)=>({
-                url:'Category',
+                url:'Category/CreateCategory',
                 method:'POST',
                 body:categoryModel
             })
         }),
         RemoveCategory:builder.mutation({
             query:(categoryId)=>({
-                url:`Category/${categoryId}`,
+                url:`Category/DeleteCategory/${categoryId}`,
                 method:'DELETE'
             })
         }),
         UpdateCategory:builder.mutation({
             query:(model)=>({
-                url:`Category/${model.categoryId}`,
+                url:`Category/UpdateCategory/${model.categoryId}`,
                 method:'PUT',
                 body:model.categoryModel
             })
         }),
-        GetVehicleByCategoryId:builder.query({ 
+        GetVehiclesByCategoryId:builder.query({ 
             query:(categoryId)=>({
-                url:`Category/GetVehicleByCategoryId/${categoryId}`,
+                url:`Category/GetVehiclesByCategoryId/${categoryId}`,
                 method:'GET'
             })    
         })   
     })
 })
 
-export const {useGetAllCategoryQuery,useCreateCategoryMutation,useRemoveCategoryMutation,useUpdateCategoryMutation,useGetVehicleByCategoryIdQuery}=categoryApi 
+export const {useGetAllCategoryQuery,useCreateCategoryMutation,useRemoveCategoryMutation,useUpdateCategoryMutation,useGetVehiclesByCategoryIdQuery}=categoryApi 
 export default categoryApi
