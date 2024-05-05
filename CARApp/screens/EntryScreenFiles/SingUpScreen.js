@@ -1,23 +1,29 @@
-import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity, ImageBackground, Alert} from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
+  ImageBackground, Image, Alert} from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
+import { auth } from '../../firebase';
 
-export default function AdminLoginScreen() {
+export default function SingUpScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    if (email === 'admin2024@gmail.com' && password === '2024admin') {
-      navigation.navigate('Manage');
-    } else {
-      Alert.alert('Hata!', 'Geçersiz e-posta veya şifre');
-    }
+  const handleSingUp = () => {
+    auth.createUserWithEmailAndPassword(email, password).
+    then(userCredentials => {
+      const user = userCredentials.user;
+      Alert.alert("Kayıt başarılı. Hoşgeldiniz: " + user.email);
+      navigation.navigate('EntryType');
+    })
+    .catch(error => Alert.alert(error.message));
+    
   };
 
   return (
-    <ImageBackground source={require('../assets/AdminLogin.jpeg')} style={styles.image}>
+    <ImageBackground source={require('../../assets/Register.jpeg')} style={styles.image}>
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
+    
     <View style={styles.containerInput}>
       <TextInput style={styles.input} placeholder='E-mail:' value={email}
       onChangeText={text=>setEmail(text)}
@@ -27,8 +33,8 @@ export default function AdminLoginScreen() {
       />
     </View>
     <View style={styles.containerButton}>
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.textButton}>Giriş Yap</Text>
+      <TouchableOpacity style={styles.button} onPress={handleSingUp}>
+        <Text style={styles.textButton}>Kayıt Ol</Text>
       </TouchableOpacity>
     </View>
    </KeyboardAvoidingView>
@@ -53,12 +59,12 @@ const styles = StyleSheet.create({
   input: {
     width: '80%',
     height: 40,
-    borderColor: 'black',
+    borderColor: '#48545b',
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 10,
     padding: 5,
-    backgroundColor: '#36a334',
+    backgroundColor: '#c1c1c1',
     fontSize: 14,
     fontWeight: 'bold',
     fontStyle:'italic',
@@ -68,8 +74,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: 'black',
-    borderColor: '#36a334',
+    backgroundColor: '#c1c1c1',
+    borderColor: '#48545b',
     borderWidth: 2,
     padding: 10,
     borderRadius: 10,
@@ -78,8 +84,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textButton: {
-    color: '#36a334',
-    fontSize: 20,
+    color: '#48545b',
+    fontSize: 16,
     fontWeight: 'bold',
     fontStyle:'italic',
   },
@@ -88,4 +94,5 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   }
+
 });

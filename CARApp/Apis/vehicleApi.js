@@ -4,7 +4,7 @@ export const vehicleApi = createApi({
   
     reducerPath: 'vehicleApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://d8d3-5-176-236-148.ngrok-free.app/api/',
+        baseUrl: 'https://af64-88-236-117-74.ngrok-free.app/api/',
     }),
     endpoints:(builder)=>({
         GetAllVehicle:builder.query({

@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function EntryTypeScreen() {
   const navigation = useNavigation();
   return (
-    <ImageBackground source={require('../assets/login.jpeg')} style={styles.image}>
+    <ImageBackground source={require('../../assets/login.jpeg')} style={styles.image}>
       <View style={styles.container}>
         
         <View style={styles.box}>

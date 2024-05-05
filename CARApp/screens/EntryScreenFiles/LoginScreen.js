@@ -1,28 +1,36 @@
 import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
   ImageBackground, Image, Alert} from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../firebase';
+import { auth } from '../../firebase';
 
 
-export default function SingUpScreen() {
+export default function LoginScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        navigation.navigate('Customer', { email: user.email })
+      }
+    });
+    return unsubscribe;
+  }, []);
 
-  const handleSingUp = () => {
-    auth.createUserWithEmailAndPassword(email, password).
+  const handleLogin = () => {
+    auth.signInWithEmailAndPassword(email, password).
     then(userCredentials => {
       const user = userCredentials.user;
-      Alert.alert("Kayıt başarılı. Hoşgeldiniz: " + user.email);
-      navigation.navigate('EntryType');
+      Alert.alert("Giriş başarılı. Hoşgeldiniz: " + user.email);
+     
     })
     .catch(error => Alert.alert(error.message));
-    
   };
 
   return (
-    <ImageBackground source={require('../assets/Register.jpeg')} style={styles.image}>
+    <ImageBackground source={require('../../assets/CustomerLogin.jpeg')} style={styles.image}>
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
     
     <View style={styles.containerInput}>
@@ -34,12 +42,13 @@ export default function SingUpScreen() {
       />
     </View>
     <View style={styles.containerButton}>
-      <TouchableOpacity style={styles.button} onPress={handleSingUp}>
-        <Text style={styles.textButton}>Kayıt Ol</Text>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.textButton}>Giriş Yap</Text>
       </TouchableOpacity>
     </View>
    </KeyboardAvoidingView>
    </ImageBackground>
+   
   )
 }
 
@@ -60,12 +69,12 @@ const styles = StyleSheet.create({
   input: {
     width: '80%',
     height: 40,
-    borderColor: '#48545b',
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 10,
     padding: 5,
-    backgroundColor: '#c1c1c1',
+    backgroundColor: '#bcbc8d',
     fontSize: 14,
     fontWeight: 'bold',
     fontStyle:'italic',
@@ -75,8 +84,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#c1c1c1',
-    borderColor: '#48545b',
+    backgroundColor: '#bcbc8d',
+    borderColor: 'black',
     borderWidth: 2,
     padding: 10,
     borderRadius: 10,
@@ -85,8 +94,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textButton: {
-    color: '#48545b',
-    fontSize: 16,
+    color: 'black',
+    fontSize: 20,
     fontWeight: 'bold',
     fontStyle:'italic',
   },

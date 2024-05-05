@@ -1,38 +1,23 @@
-import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
-  ImageBackground, Image, Alert} from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity, ImageBackground, Alert} from 'react-native'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../firebase';
 
-
-export default function LoginScreen() {
+export default function AdminLoginScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        navigation.navigate('Customer', { email: user.email })
-      }
-    });
-    return unsubscribe;
-  }, []);
 
   const handleLogin = () => {
-    auth.signInWithEmailAndPassword(email, password).
-    then(userCredentials => {
-      const user = userCredentials.user;
-      Alert.alert("Giriş başarılı. Hoşgeldiniz: " + user.email);
-     
-    })
-    .catch(error => Alert.alert(error.message));
+    if (email === 'admin2024@gmail.com' && password === '2024admin') {
+      navigation.navigate('Manage');
+    } else {
+      Alert.alert('Hata!', 'Geçersiz e-posta veya şifre');
+    }
   };
 
   return (
-    <ImageBackground source={require('../assets/CustomerLogin.jpeg')} style={styles.image}>
+    <ImageBackground source={require('../../assets/AdminLogin.jpeg')} style={styles.image}>
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
-    
     <View style={styles.containerInput}>
       <TextInput style={styles.input} placeholder='E-mail:' value={email}
       onChangeText={text=>setEmail(text)}
@@ -48,7 +33,6 @@ export default function LoginScreen() {
     </View>
    </KeyboardAvoidingView>
    </ImageBackground>
-   
   )
 }
 
@@ -74,7 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     padding: 5,
-    backgroundColor: '#bcbc8d',
+    backgroundColor: '#36a334',
     fontSize: 14,
     fontWeight: 'bold',
     fontStyle:'italic',
@@ -84,8 +68,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#bcbc8d',
-    borderColor: 'black',
+    backgroundColor: 'black',
+    borderColor: '#36a334',
     borderWidth: 2,
     padding: 10,
     borderRadius: 10,
@@ -94,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textButton: {
-    color: 'black',
+    color: '#36a334',
     fontSize: 20,
     fontWeight: 'bold',
     fontStyle:'italic',
@@ -104,5 +88,4 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   }
-
 });
