@@ -4,7 +4,7 @@ export const categoryApi = createApi({
   
     reducerPath: 'categoryApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://af64-88-236-117-74.ngrok-free.app/api/',
+        baseUrl: 'https://262f-5-176-237-25.ngrok-free.app/api/',
     }),
     endpoints:(builder)=>({
         GetAllCategory:builder.query({

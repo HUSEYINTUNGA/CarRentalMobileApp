@@ -4,7 +4,7 @@ export const vehicleApi = createApi({
   
     reducerPath: 'vehicleApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://af64-88-236-117-74.ngrok-free.app/api/',
+        baseUrl: 'https://262f-5-176-237-25.ngrok-free.app/api/',
     }),
     endpoints:(builder)=>({
         GetAllVehicle:builder.query({
@@ -30,7 +30,7 @@ export const vehicleApi = createApi({
             query:(model)=>({
                 url:`Vehicle/UpDateVehicle${model.VehicleId}`,
                 method:'PUT',
-                body:model.VehicleModel
+                body:model.vehicleModel
             })
         }),
         GetVehiclesByVehicleId:builder.query({

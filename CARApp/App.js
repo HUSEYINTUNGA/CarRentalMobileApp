@@ -24,8 +24,9 @@ export default function App() {
   return (   
     <Provider store={store}>
     <NavigationContainer style={styles.container}>
-    <Stack.Navigator initialRouteName="Customer">
-      {/* <Stack.Navigator initialRouteName="EntryType"> */}
+      {/* <Stack.Navigator initialRouteName='AboutMe'> */}
+    {/* <Stack.Navigator initialRouteName="Customer"> */}
+      <Stack.Navigator initialRouteName="EntryType">
         <Stack.Screen name="EntryType" component={EntryTypeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Customer" component={CustomerScreen} options={{headerShown:false}}/>

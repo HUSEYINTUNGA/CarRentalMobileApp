@@ -1,55 +1,49 @@
-import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
-  ImageBackground, Image, Alert} from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../../firebase';
+import { useLoginCustomerQuery } from '../../Apis/CustomerApi';
+import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
+  ImageBackground,Alert} from 'react-native';
 
-
-export default function LoginScreen() {
-  const navigation = useNavigation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  export default function LoginScreen() {
+    const navigation = useNavigation();
+    const [loginCustomer] = useLoginCustomerQuery();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
   
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        navigation.navigate('Customer', { email: user.email })
+    const handleLogin = async () => {
+      try {
+          const response = await loginCustomer({ customerEmail: email, customerPassword: password });
+          console.log(response);
+          if (response.data) {
+              navigation.navigate('Customer', { name: response.data.CustomerName, id: response.data.CustomerId });
+          }
+      } catch (err) {
+          console.error(err);
+          Alert.alert('Giriş Başarısız', 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.');
       }
-    });
-    return unsubscribe;
-  }, []);
-
-  const handleLogin = () => {
-    auth.signInWithEmailAndPassword(email, password).
-    then(userCredentials => {
-      const user = userCredentials.user;
-      Alert.alert("Giriş başarılı. Hoşgeldiniz: " + user.email);
+    };
+  
+    return (
+      <ImageBackground source={require('../../assets/CustomerLogin.jpeg')} style={styles.image}>
+      <KeyboardAvoidingView style={styles.container} behavior='padding'>
+      
+      <View style={styles.containerInput}>
+        <TextInput style={styles.input} placeholder='E-mail:' value={email}
+        onChangeText={text=>setEmail(text)}
+        />
+        <TextInput style={styles.input} placeholder='Şifre:' value={password} secureTextEntry
+        onChangeText={sifre=>setPassword(sifre)}
+        />
+      </View>
+      <View style={styles.containerButton}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.textButton}>Giriş Yap</Text>
+        </TouchableOpacity>
+      </View>
+     </KeyboardAvoidingView>
+     </ImageBackground>
      
-    })
-    .catch(error => Alert.alert(error.message));
-  };
-
-  return (
-    <ImageBackground source={require('../../assets/CustomerLogin.jpeg')} style={styles.image}>
-    <KeyboardAvoidingView style={styles.container} behavior='padding'>
-    
-    <View style={styles.containerInput}>
-      <TextInput style={styles.input} placeholder='E-mail:' value={email}
-      onChangeText={text=>setEmail(text)}
-      />
-      <TextInput style={styles.input} placeholder='Şifre:' value={password} secureTextEntry
-      onChangeText={sifre=>setPassword(sifre)}
-      />
-    </View>
-    <View style={styles.containerButton}>
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.textButton}>Giriş Yap</Text>
-      </TouchableOpacity>
-    </View>
-   </KeyboardAvoidingView>
-   </ImageBackground>
-   
-  )
+    )
 }
 
 const styles = StyleSheet.create({
@@ -104,5 +98,4 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   }
-
 });

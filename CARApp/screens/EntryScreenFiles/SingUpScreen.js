@@ -1,23 +1,31 @@
-import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
-  ImageBackground, Image, Alert} from 'react-native'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../../firebase';
+import { useCreateCustomerMutation } from '../../Apis/CustomerApi';
+import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
+  ImageBackground, Alert} from 'react-native';
 
 export default function SingUpScreen() {
   const navigation = useNavigation();
+  const [createCustomer] = useCreateCustomerMutation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const handleSingUp = () => {
-    auth.createUserWithEmailAndPassword(email, password).
-    then(userCredentials => {
-      const user = userCredentials.user;
-      Alert.alert("Kayıt başarılı. Hoşgeldiniz: " + user.email);
-      navigation.navigate('EntryType');
-    })
-    .catch(error => Alert.alert(error.message));
-    
+  const handleSingUp = async () => {
+    try {
+        const response = await createCustomer({ CustomerEmail: email, CustomerPassword: password, CustomerName: name, CustomerPhone: phone });
+        console.log(response);
+        
+        if (response.data) {
+            Alert.alert("Kayıt başarılı. Hoşgeldiniz: " + response.data.CustomerName);
+            navigation.navigate('EntryType');
+        }
+    } catch (err) {
+        console.error(err);
+        
+        Alert.alert('Kayıt Başarısız', 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.');
+    }
   };
 
   return (
@@ -25,8 +33,14 @@ export default function SingUpScreen() {
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
     
     <View style={styles.containerInput}>
+      <TextInput style={styles.input} placeholder='Ad:' value={name}
+      onChangeText={text=>setName(text)}
+      />
       <TextInput style={styles.input} placeholder='E-mail:' value={email}
       onChangeText={text=>setEmail(text)}
+      />
+      <TextInput style={styles.input} placeholder='Telefon:' value={phone}
+      onChangeText={text=>setPhone(text)}
       />
       <TextInput style={styles.input} placeholder='Şifre:' value={password} secureTextEntry
       onChangeText={sifre=>setPassword(sifre)}
@@ -94,5 +108,4 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   }
-
 });
