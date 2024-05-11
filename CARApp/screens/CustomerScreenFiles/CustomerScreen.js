@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function CustomerScreen() {
-  // const {email}=route.params;
+export default function CustomerScreen({route}) {
+  const {userId}=route.params;
   const navigation = useNavigation();
   const { data, isLoading } = useGetAllCategoryQuery();
   
@@ -32,11 +32,13 @@ export default function CustomerScreen() {
       <Appbar.Action icon="cog" onPress={() => handleSettings(navigation)} />
       <Appbar.Action icon="information" onPress={() => handleAbout(navigation)} /> 
       </Appbar.Header>
+      <Text>{id}</Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Card style={styles.card} onPress={() => navigation.navigate('ListedVehicles', { id: item.id , name:item.categoryName})}>
+          <Card style={styles.card} onPress={() => navigation.navigate('ListedVehicles',
+           { categoryId: item.id , category:item.categoryName,userId:userId})}>
             <Card.Content>
               <Title style={styles.appbarTitle}>{item.categoryName}</Title>
               <Text style={styles.appbarText}>{item.categoryName} Kategorisindeki araçları görüntülemek için tıkla.</Text>

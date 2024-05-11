@@ -4,9 +4,9 @@ import { Title,Appbar} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useGetVehiclesByCategoryIdQuery } from '../../Apis/categoryApi';
 export default function ListedVehicles({ route }) {
-  const  {id, name } = route.params;
+  const  {categoryId, category, userId } = route.params;
   const navigation = useNavigation();
-  const {data,isLoading} = useGetVehiclesByCategoryIdQuery(id);
+  const {data,isLoading} = useGetVehiclesByCategoryIdQuery(categoryId);
 
     if (isLoading) {
       return <Title>İsLoading...</Title>;
@@ -15,7 +15,7 @@ export default function ListedVehicles({ route }) {
   
     const handleFeedBack = () => {navigation.navigate('FeedBack')};
     const handleLogin = () => {navigation.navigate('Login')};
-    const handleDetails = (id) => {navigation.navigate('VehicleDetails',{id:id});}; 
+    const handleDetails = (id) => {navigation.navigate('VehicleDetails',{carId:id,userId:userId});}; 
     const handleAbout = () => {navigation.navigate('AboutMe')};
     const handleSettings = () => {navigation.navigate('Login')};
     
@@ -23,7 +23,7 @@ export default function ListedVehicles({ route }) {
     <View style={{backgroundColor: '#aaffff'}}>
 
       <Appbar.Header style={styles.appbar}>    
-      <Appbar.Content title={name}/>
+      <Appbar.Content title={category}/>
       <Appbar.Action icon="email" onPress={() => handleFeedBack(navigation)} />
       <Appbar.Action icon="login" onPress={() => handleLogin(navigation)} />
       <Appbar.Action icon="cog" onPress={() => handleSettings(navigation)} />

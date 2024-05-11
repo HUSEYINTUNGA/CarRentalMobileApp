@@ -1,10 +1,11 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { config } from './config';
 
 export const rentalHistoryApi = createApi({
 
     reducerPath: 'rentalHistory',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://262f-5-176-237-25.ngrok-free.app/api/',
+        baseUrl: config.baseUrl,
     }),
     endpoints:(builder)=>({
         GetAllHistory:builder.query({
@@ -32,6 +33,7 @@ export const rentalHistoryApi = createApi({
                 method:'GET'
             })
         }),
+        
     })
 })
 

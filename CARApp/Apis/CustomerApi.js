@@ -1,10 +1,11 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { config } from './config';
 
 export const CustomerApi = createApi({
   
     reducerPath: 'CustomerApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://262f-5-176-237-25.ngrok-free.app/api/',
+        baseUrl: config.baseUrl,
     }),
     endpoints:(builder)=>({
         GetAllCustomer:builder.query({
@@ -39,15 +40,30 @@ export const CustomerApi = createApi({
                 method:'GET'
             })
         }),  
-        LoginCustomer: builder.query({
-            query: ({ customerEmail, customerPassword }) => ({
-                url: `Customer/LoginCustomer?customerEmail=${customerEmail}&customerPassword=${customerPassword}`,
-                method: 'GET',
+        LoginCustomer: builder.mutation({
+            query: (customerLoginModel ) => ({
+                url: `Customer/LoginCustomer`,
+                method: 'POST',
+                body: customerLoginModel
             }),
+        }),
+        LoginAdmin: builder.mutation({
+            query:(adminLoginModel)=>({
+                url: `Customer/LoginAdmin`,
+                method: 'POST',
+                body: adminLoginModel
+            })
+        }),
+        SetRolesOfCustomer: builder.mutation({
+            query:(model)=>({
+                url:`Customer/SetRolesOfUsers/${model.customerId}`,
+                method:'POST',
+                body:model
+            })
         })
     })
 })
 
 
-export const {useGetAllCustomerQuery,useCreateCustomerMutation,useRemoveCustomerMutation,useUpdateCustomerMutation,useGetCustomerByCustomerIdQuery,useLoginCustomerQuery}=CustomerApi
+export const {useGetAllCustomerQuery,useCreateCustomerMutation,useRemoveCustomerMutation,useUpdateCustomerMutation,useGetCustomerByCustomerIdQuery,useLoginCustomerMutation,useLoginAdminMutation,useSetRolesOfCustomerMutation}=CustomerApi
 export default CustomerApi

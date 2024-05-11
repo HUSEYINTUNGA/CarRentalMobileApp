@@ -14,7 +14,7 @@ export default function SingUpScreen() {
 
   const handleSingUp = async () => {
     try {
-        const response = await createCustomer({ CustomerEmail: email, CustomerPassword: password, CustomerName: name, CustomerPhone: phone });
+        const response =  createCustomer({ CustomerEmail: email, CustomerPassword: password, CustomerName: name, CustomerPhone: phone });
         console.log(response);
         
         if (response.data) {

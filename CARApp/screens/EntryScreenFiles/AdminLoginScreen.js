@@ -4,26 +4,34 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function AdminLoginScreen() {
   const navigation = useNavigation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [model, setModel] = useState({
+    email: '',
+    password: '',
+  });
+  const[userLogin]=useLoginCustomerMutation();
+  
 
-  const handleLogin = () => {
-    if (email === 'admin2024@gmail.com' && password === '2024admin') {
-      navigation.navigate('Manage');
-    } else {
-      Alert.alert('Hata!', 'Geçersiz e-posta veya şifre');
-    }
+  function SetLoginInformation(inputIdentifier,enteredValue){
+    setModel((currentInputValue)=>{
+      return{
+       ...currentInputValue,
+        [inputIdentifier]:enteredValue
+      }
+    })
   };
+  const handleLogin = async () => {
+    userLogin({email:model.email,password:model.password}).then((value)=>navigation.navigate('Manage'));   
+  }
 
   return (
     <ImageBackground source={require('../../assets/AdminLogin.jpeg')} style={styles.image}>
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
     <View style={styles.containerInput}>
-      <TextInput style={styles.input} placeholder='E-mail:' value={email}
-      onChangeText={text=>setEmail(text)}
+      <TextInput style={styles.input} placeholder='E-mail:' 
+      onChangeText={SetLoginInformation.bind(this,'email')}
       />
-      <TextInput style={styles.input} placeholder='Şifre:' value={password} secureTextEntry
-      onChangeText={sifre=>setPassword(sifre)}
+      <TextInput style={styles.input} placeholder='Şifre:'  secureTextEntry
+      onChangeText={SetLoginInformation.bind(this,'email')}
       />
     </View>
     <View style={styles.containerButton}>

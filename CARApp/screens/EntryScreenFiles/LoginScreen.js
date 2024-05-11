@@ -1,38 +1,42 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { useLoginCustomerQuery } from '../../Apis/CustomerApi';
+import { useLoginCustomerMutation } from '../../Apis/CustomerApi';
 import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity,
   ImageBackground,Alert} from 'react-native';
 
   export default function LoginScreen() {
     const navigation = useNavigation();
-    const [loginCustomer] = useLoginCustomerQuery();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [model, setModel] = useState({
+      email: '',
+      password: '',
+    });
+    const[userLogin]=useLoginCustomerMutation();
+    
   
-    const handleLogin = async () => {
-      try {
-          const response = await loginCustomer({ customerEmail: email, customerPassword: password });
-          console.log(response);
-          if (response.data) {
-              navigation.navigate('Customer', { name: response.data.CustomerName, id: response.data.CustomerId });
-          }
-      } catch (err) {
-          console.error(err);
-          Alert.alert('Giriş Başarısız', 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.');
-      }
+    function SetLoginInformation(inputIdentifier,enteredValue){
+      setModel((currentInputValue)=>{
+        return{
+         ...currentInputValue,
+          [inputIdentifier]:enteredValue
+        }
+      })
     };
+    const handleLogin = async () => {
+      userLogin({email:model.email,password:model.password}).then((value)=>navigation.navigate('Customer',{userId:value.data.id}));
+      
+    }
+    
   
     return (
       <ImageBackground source={require('../../assets/CustomerLogin.jpeg')} style={styles.image}>
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
       
       <View style={styles.containerInput}>
-        <TextInput style={styles.input} placeholder='E-mail:' value={email}
-        onChangeText={text=>setEmail(text)}
+        <TextInput style={styles.input} placeholder='E-mail:' 
+        onChangeText={SetLoginInformation.bind(this,'email')}
         />
-        <TextInput style={styles.input} placeholder='Şifre:' value={password} secureTextEntry
-        onChangeText={sifre=>setPassword(sifre)}
+        <TextInput style={styles.input} placeholder='Şifre:'  secureTextEntry
+        onChangeText={SetLoginInformation.bind(this,'password')}
         />
       </View>
       <View style={styles.containerButton}>

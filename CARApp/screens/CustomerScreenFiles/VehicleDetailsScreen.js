@@ -5,9 +5,9 @@ import { useGetVehiclesByVehicleIdQuery } from '../../Apis/vehicleApi';
 import { useNavigation } from '@react-navigation/native';
 
 export default function VehicleDetails({ route }) {
-  const { id } = route.params;
+  const { carId,userId } = route.params;
   const navigation = useNavigation();
-  const { data, isLoading } = useGetVehiclesByVehicleIdQuery(id);
+  const { data, isLoading } = useGetVehiclesByVehicleIdQuery(carId);
  
   if (isLoading) {
     return <Title>Loading...</Title>;
@@ -20,7 +20,7 @@ export default function VehicleDetails({ route }) {
   const handleAbout = () => navigation.navigate('AboutMe');
 
   const handleRent = () => {
-    navigation.navigate('RentalInformation', { vehicleId: id });
+    navigation.navigate('RentalInformation', { carId: carId, userId: userId });
   };
   return (
     <View style={styles.container}>
