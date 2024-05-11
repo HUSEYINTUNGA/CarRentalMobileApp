@@ -12,6 +12,13 @@ import ListedVehiclesScreen from './screens/CustomerScreenFiles/ListedVehiclesSc
 import VehicleDetailsScreen from './screens/CustomerScreenFiles/VehicleDetailsScreen';
 import RentalInformationScreen from './screens/CustomerScreenFiles/RentalInformationScreen';
 import AboutMeScreen from './screens/CustomerScreenFiles/AboutMeScreen';
+import CustomerSettingsScreen from './screens/CustomerScreenFiles/CustomerSettingsScreen';
+import AccountingScreen from './screens/AdminScreenFiles/AccountingScreen';
+import ManageCategoriesScreen from './screens/AdminScreenFiles/ManageCategoriesScreen';
+import ManageVehiclesScreen from './screens/AdminScreenFiles/ManageVehiclesScreen';
+import MessagesCustomersScreen from './screens/AdminScreenFiles/MessagesCustomersScreen';
+import RentalRequestsScreen from './screens/AdminScreenFiles/RentalRequestsScreen';
+import ManageRolesOfCustomersScreen from './screens/AdminScreenFiles/ManageRolesOfCustomersScreen';
 import { Provider } from 'react-redux';
 import { store } from './Storage/store';
 
@@ -38,6 +45,13 @@ export default function App() {
         <Stack.Screen name="VehicleDetails" component={VehicleDetailsScreen} options={{headerShown:false}}/>
         <Stack.Screen name="RentalInformation" component={RentalInformationScreen} options={{headerShown:false}}/>
         <Stack.Screen name="AboutMe" component={AboutMeScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="CustomerSettings" component={CustomerSettingsScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="ManageVehicles" component={ManageVehiclesScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Accounting" component={AccountingScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="MessagesCustomers" component={MessagesCustomersScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="RentalRequests" component={RentalRequestsScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="ManageRoles" component={ManageRolesOfCustomersScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="ManageCategories" component={ManageCategoriesScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

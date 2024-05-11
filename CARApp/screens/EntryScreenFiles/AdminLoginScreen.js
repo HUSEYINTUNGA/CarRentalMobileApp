@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function AdminLoginScreen() {
   const navigation = useNavigation();
+  const [data,setData]=useState(false);
   const [model, setModel] = useState({
     email: '',
     password: '',
@@ -20,7 +21,14 @@ export default function AdminLoginScreen() {
     })
   };
   const handleLogin = async () => {
-    userLogin({email:model.email,password:model.password}).then((value)=>navigation.navigate('Manage'));   
+    userLogin({email:model.email,password:model.password}).then((value)=>setData(value));   
+    if(!data) {
+      Alert.alert("Giriş bilgileri hatalı. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.")
+    }
+    else{
+      Alert.alert("Giriş Başarılı. Hoşgeldiniz Sayın "+data.customerName)
+      navigation.navigate('Manage');
+    }
   }
 
   return (

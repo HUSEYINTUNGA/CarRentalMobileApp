@@ -3,21 +3,20 @@ import React from 'react'
 import { Appbar} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-export default function FeedBackScreen() {
+export default function FeedBackScreen({route}) {
+  const {userId}=route.params;
   const navigation = useNavigation();
-  const _handleCustomer = () => {navigation.navigate('Customer')};
-  const _handleLogin = () => {navigation.navigate('Login')};
-  const _handleAbout = () => {navigation.navigate('AboutMe')};
-  const _handleSettings = () => {navigation.navigate('Login')};
+  const handleLogin = () => {navigation.navigate('Login')};
+  const handleAbout = () => {navigation.navigate('AboutMe',{userId: userId})};
+  const handleSettings = () => {navigation.navigate('CustomerSettings',{userId: userId})};
 
   return (
     <View>
       <Appbar.Header style={styles.appbar}>
       <Appbar.Content title='Bize Ulaşın'/>
-      <Appbar.Action icon="car" onPress={() => _handleCustomer(navigation)} />
-      <Appbar.Action icon="login" onPress={() => _handleLogin(navigation)} />
-      <Appbar.Action icon="cog" onPress={() => _handleSettings(navigation)} />
-      <Appbar.Action icon="information" onPress={() => _handleAbout(navigation)} />
+      <Appbar.Action icon="login" onPress={() => handleLogin(navigation)} />
+      <Appbar.Action icon="cog" onPress={() => handleSettings(navigation)} />
+      <Appbar.Action icon="information" onPress={() => handleAbout(navigation)} />
       </Appbar.Header>
     </View>
   )

@@ -6,6 +6,7 @@ import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpac
 
   export default function LoginScreen() {
     const navigation = useNavigation();
+    const [data,setData]=useState(undefined);
     const [model, setModel] = useState({
       email: '',
       password: '',
@@ -22,7 +23,17 @@ import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpac
       })
     };
     const handleLogin = async () => {
-      userLogin({email:model.email,password:model.password}).then((value)=>navigation.navigate('Customer',{userId:value.data.id}));
+      userLogin({email:model.email,password:model.password}).then((value)=>setData(value));
+      
+      
+      if(data==undefined) {
+        Alert.alert("Giriş bilgileri hatalı. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.");
+        
+      }
+      else{
+        Alert.alert("Giriş Başarılı. Hoşgeldiniz Sayın "+data.data.customerName);  
+        navigation.navigate('Customer',{userId:data.data.id});
+      }
       
     }
     

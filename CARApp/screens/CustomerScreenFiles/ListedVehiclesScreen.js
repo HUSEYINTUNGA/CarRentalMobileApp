@@ -12,12 +12,11 @@ export default function ListedVehicles({ route }) {
       return <Title>İsLoading...</Title>;
     }
     
-  
-    const handleFeedBack = () => {navigation.navigate('FeedBack')};
+    const handleFeedBack = () => {navigation.navigate('FeedBack',{userId: userId})};
     const handleLogin = () => {navigation.navigate('Login')};
+    const handleAbout = () => {navigation.navigate('AboutMe',{userId: userId})};
+    const handleSettings = () => {navigation.navigate('CustomerSettings',{userId: userId})};
     const handleDetails = (id) => {navigation.navigate('VehicleDetails',{carId:id,userId:userId});}; 
-    const handleAbout = () => {navigation.navigate('AboutMe')};
-    const handleSettings = () => {navigation.navigate('Login')};
     
   return (
     <View style={{backgroundColor: '#aaffff'}}>

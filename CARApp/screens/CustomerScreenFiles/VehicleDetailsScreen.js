@@ -14,10 +14,10 @@ export default function VehicleDetails({ route }) {
   }
 
  
-  const handleFeedBack = () => navigation.navigate('FeedBack');
+  const handleFeedBack = () => navigation.navigate('FeedBack',{userId: userId});
   const handleLogin = () => navigation.navigate('Login');
-  const handleSettings = () => navigation.navigate('Customer');
-  const handleAbout = () => navigation.navigate('AboutMe');
+  const handleSettings = () => navigation.navigate('CustomerSettings',{userId: userId});
+  const handleAbout = () => navigation.navigate('AboutMe',{userId: userId});
 
   const handleRent = () => {
     navigation.navigate('RentalInformation', { carId: carId, userId: userId });

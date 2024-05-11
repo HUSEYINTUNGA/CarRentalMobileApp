@@ -16,10 +16,10 @@ export default function CustomerScreen({route}) {
     return <Title>İsLoading...</Title>;
   }
 
-  const _handleFeedBack = () => {navigation.navigate('FeedBack')};
+  const handleFeedBack = () => {navigation.navigate('FeedBack',{userId: userId});};
   const handleLogin = () => {navigation.navigate('Login')};
-  const handleAbout = () => {navigation.navigate('AboutMe')};
-  const handleSettings = () => {navigation.navigate('Login')};
+  const handleAbout = () => {navigation.navigate('AboutMe',{userId: userId})};
+  const handleSettings = () => {navigation.navigate('CustomerSettings',{userId: userId});};
 
 
   return (
@@ -27,12 +27,12 @@ export default function CustomerScreen({route}) {
     <View style={styles.container}>
       <Appbar.Header style={styles.appbar}>
       <Appbar.Content title="Kullanıcı Sayfası" />
-      <Appbar.Action icon="email" onPress={()=>_handleFeedBack(navigation)} />    
+      <Appbar.Action icon="email" onPress={()=>handleFeedBack(navigation)} />    
       <Appbar.Action icon="login" onPress={handleLogin} />  
       <Appbar.Action icon="cog" onPress={() => handleSettings(navigation)} />
       <Appbar.Action icon="information" onPress={() => handleAbout(navigation)} /> 
       </Appbar.Header>
-      <Text>{id}</Text>
+      <Text>{userId}</Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
@@ -53,6 +53,7 @@ export default function CustomerScreen({route}) {
 
 const styles = StyleSheet.create({
   card: {
+    flex: 1,
     margin: 10,
     top: 20,
     padding: 10,
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor:'#aaffff',
+    backgroundColor:'#aaffff', 
   },
   appbar: {
     backgroundColor:'#9b9b9b',

@@ -11,47 +11,44 @@ export default function SingUpScreen() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-
+  const [data, setData] = useState(false);
   const handleSingUp = async () => {
-    try {
-        const response =  createCustomer({ CustomerEmail: email, CustomerPassword: password, CustomerName: name, CustomerPhone: phone });
-        console.log(response);
-        
-        if (response.data) {
-            Alert.alert("Kayıt başarılı. Hoşgeldiniz: " + response.data.CustomerName);
-            navigation.navigate('EntryType');
-        }
-    } catch (err) {
-        console.error(err);
-        
-        Alert.alert('Kayıt Başarısız', 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.');
+    createCustomer({ CustomerEmail: email, CustomerPassword: password, CustomerName: name, CustomerPhone: phone }).then((value) => {setData(value)});
+             
+    if (value.data !== false)
+    {
+      Alert.alert("Kayıt başarılı. Bizi tercih ettiğiniz için teşekkür ederiz.");
+      navigation.navigate('EntryType');
+    }
+    else
+    {       
+      Alert.alert('Kayıt Başarısız', 'Bir hata oluştu. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.');
     }
   };
 
   return (
     <ImageBackground source={require('../../assets/Register.jpeg')} style={styles.image}>
-    <KeyboardAvoidingView style={styles.container} behavior='padding'>
-    
-    <View style={styles.containerInput}>
-      <TextInput style={styles.input} placeholder='Ad:' value={name}
-      onChangeText={text=>setName(text)}
-      />
-      <TextInput style={styles.input} placeholder='E-mail:' value={email}
-      onChangeText={text=>setEmail(text)}
-      />
-      <TextInput style={styles.input} placeholder='Telefon:' value={phone}
-      onChangeText={text=>setPhone(text)}
-      />
-      <TextInput style={styles.input} placeholder='Şifre:' value={password} secureTextEntry
-      onChangeText={sifre=>setPassword(sifre)}
-      />
-    </View>
-    <View style={styles.containerButton}>
-      <TouchableOpacity style={styles.button} onPress={handleSingUp}>
-        <Text style={styles.textButton}>Kayıt Ol</Text>
-      </TouchableOpacity>
-    </View>
-   </KeyboardAvoidingView>
+      <KeyboardAvoidingView style={styles.container} behavior='padding'>      
+        <View style={styles.containerInput}>
+          <TextInput style={styles.input} placeholder='Ad:' value={name}
+          onChangeText={text=>setName(text)}
+          />
+          <TextInput style={styles.input} placeholder='E-mail:' value={email}
+          onChangeText={text=>setEmail(text)}
+          />
+          <TextInput style={styles.input} placeholder='Telefon:' value={phone}
+          onChangeText={text=>setPhone(text)}
+          />
+          <TextInput style={styles.input} placeholder='Şifre:' value={password} secureTextEntry
+          onChangeText={sifre=>setPassword(sifre)}
+          />
+        </View>
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={styles.button} onPress={handleSingUp}>
+            <Text style={styles.textButton}>Kayıt Ol</Text>
+          </TouchableOpacity>
+        </View>
+    </KeyboardAvoidingView>
    </ImageBackground>
   )
 }
