@@ -6,6 +6,8 @@ export default function ManageCategoriesScreen() {
     <View>
       <Text>ManageCategoriesScreen</Text>
     </View>
+
+    //Categori işlemleri yapılacak
   )
 }
 

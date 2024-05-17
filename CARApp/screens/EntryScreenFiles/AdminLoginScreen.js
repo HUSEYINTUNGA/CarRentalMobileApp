@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpacity, ImageBackground, Alert} from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-
+import { useLoginAdminMutation } from '../../Apis/CustomerApi';
 export default function AdminLoginScreen() {
   const navigation = useNavigation();
   const [data,setData]=useState(false);
@@ -9,7 +9,7 @@ export default function AdminLoginScreen() {
     email: '',
     password: '',
   });
-  const[userLogin]=useLoginCustomerMutation();
+  const[userLogin]=useLoginAdminMutation();
   
 
   function SetLoginInformation(inputIdentifier,enteredValue){

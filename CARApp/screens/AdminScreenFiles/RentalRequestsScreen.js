@@ -6,6 +6,8 @@ export default function RentalRequestsScreen() {
     <View>
       <Text>RentalRequestsScreen</Text>
     </View>
+
+    // Kullanıcı istekleri onay işlemleri history üzerinden onay işlemleri yapılacak
   )
 }
 

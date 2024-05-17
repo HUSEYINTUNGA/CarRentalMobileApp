@@ -6,6 +6,9 @@ export default function MessagesCustomersScreen() {
     <View>
       <Text>MessagesCustomersScreen</Text>
     </View>
+
+
+    //Burası için bir fikrim yok şuan
   )
 }
 

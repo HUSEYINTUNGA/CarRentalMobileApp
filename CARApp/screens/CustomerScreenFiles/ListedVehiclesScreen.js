@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react';
-import { Title,Appbar} from 'react-native-paper';
+import { Appbar} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useGetVehiclesByCategoryIdQuery } from '../../Apis/categoryApi';
 export default function ListedVehicles({ route }) {
@@ -9,7 +9,7 @@ export default function ListedVehicles({ route }) {
   const {data,isLoading} = useGetVehiclesByCategoryIdQuery(categoryId);
 
     if (isLoading) {
-      return <Title>İsLoading...</Title>;
+      return <Text>İsLoading...</Text>;
     }
     
     const handleFeedBack = () => {navigation.navigate('FeedBack',{userId: userId})};

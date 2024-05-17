@@ -6,6 +6,8 @@ export default function ManageRolesOfCustomersScreen() {
     <View>
       <Text>ManageRolesOfCustomersScreen</Text>
     </View>
+
+    // Kullanıcıların rolleri belirlenecek
   )
 }
 
