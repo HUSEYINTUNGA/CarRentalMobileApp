@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View,TextInput, Button,TouchableOpacity,Image } from 'react-native'
+import { FlatList, StyleSheet, Text, View,TextInput, Button,TouchableOpacity,Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import {useCreateVehicleMutation, useGetAllVehicleQuery, useRemoveVehicleMutation}from '../../Apis/vehicleApi';
 import{Picker} from'@react-native-picker/picker';
@@ -7,12 +7,13 @@ import { Title } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ManageVehiclesScreen() {
-    const [selectedOption, setSelectedOption] = useState('active');
+    const [selectedOption, setSelectedOption] = useState('');
+    
+    const handleOptionChange = (value) => {
+      setSelectedOption(value);
+    };
     const renderVehicleList = () => {
-      if (selectedOption === 'add') {
-        return <AddVehicle />;
-      }
-      else if (selectedOption === 'remove') {
+      if (selectedOption === 'remove') {
         return <RemoveVehicle/>;
       }
       else if (selectedOption === 'update') {
@@ -22,146 +23,74 @@ export default function ManageVehiclesScreen() {
     };
   
   return(
-    <View>
 
+
+// Buraya ekleme işlemi yapılacak
+
+
+    <View>
+      <Text>Başka bir işlem mi yapmak istiyorsunuz</Text>
       <Picker
         selectedValue={selectedOption}
         onValueChange={handleOptionChange}
       >
-          <Picker.Item label="Araç Ekle" value="add" />
+          <Picker.Item label="Lütfen Seçiniz.." value="  " />
           <Picker.Item label="Araç Sil" value="remove" />
-          <Picker.Item label="Araç Bilgilerini Güncelle" value="update"/>
+          <Picker.Item label="Araç Bilgilerini Güncelle" value="update" />
       </Picker>
       {renderVehicleList()}
+      
     </View>
     
   )
   }
 
-
-  function AddVehicle(){
-    const {data,isLoading}=useGetAllCategoryQuery();
-    const {vehicle,setVehicle}=useState('');
-
-    if(isLoading){
-      return <Title>İsLoading...</Title>;
-    }
-
-    const[inputVehicleModel]=useCreateVehicleMutation();
-
-    const [model,setModel]=useState({
-      brand:'',
-      model:'',
-      modelYear:'',
-      price:'',
-      transmissionType:'',
-      fuelType:'',
-      numberPlate:'',
-      isActive:true,
-      pictureUrl:'',
-      categoryId:''
-    });
-
-    function setVehicleInformation(inputIdentifier,enteredValue){
-      setModel((currentInputValue)=>{
-        return{
-         ...currentInputValue,
-          [inputIdentifier]:enteredValue
-        }
-      })
-    };
-
-    const handleAddVehicle= async ()=>{
-      inputVehicleModel({brand:model.brand,model:model.model,modelYear:model.modelYear,
-        price:model.price,transmissionType:model.transmissionType,fuelType:model.fuelType,
-        numberPlate:model.numberPlate,isActive:model.isActive,pictureUrl:model.pictureUrl,
-        categoryId:model.categoryId}).then((value)=>setVehicle(value));
-      if(!vehicle) {
-        Alert.alert("Araç kaydedilemedi bilgileri doğru formatta girdiğinizden emin olun")
-      }
-      else{
-        Alert.alert("Kayıt Başarılı")
-      }
-      return(
-        <View>
-          <TouchableOpacity style={styles.container}>
-                <Image source={{ uri: vehicle.pictureUrl }} style={styles.img} />
-                <View style={styles.textContainer}>
-                  <Text style={styles.textBrand}>{vehicle.brand}</Text>
-                  <Text style={styles.textModel}>{vehicle.model} {vehicle.modelYear}</Text>
-                  <Text style={styles.textPrice}>{vehicle.price} TL</Text>
-                  <Text style={styles.textPlate}>{vehicle.numberPlate}</Text>
-                </View>
-          </TouchableOpacity>
-        </View>)
-    }
-
-    return(
-     
-      <View>
-        <TextInput placeholder='Araç markasını giriniz: ' onChangeText={setVehicleInformation.bind(this,'brand')}/>
-        <TextInput placeholder='Araç modelini giriniz: ' onChangeText={setVehicleInformation.bind(this,'brand')}/>
-        <TextInput placeholder='Araç model yılını giriniz: ' onChangeText={setVehicleInformation.bind(this,'brand')}/>
-        <TextInput placeholder='Aracın günlük kiralama ücretini giriniz: ' onChangeText={setVehicleInformation.bind(this,'brand')}/>
-        <Text>Aracın Şanzıman türünü seçiniz</Text>
-        <Picker onChangeValue={setVehicleInformation.bind(this,'transmissionType')}>
-          <Picker.Item label='Lütfen Seçiniz..' value=' '/>
-          <Picker.Item label='Otomatik' value='Otomatik'/>
-          <Picker.Item label='Manuel' value='Manuel'/>
-        </Picker>
-        <Text>Aracın yakıt türünü seçiniz</Text>
-        <Picker onChangeValue={setVehicleInformation.bind(this,'fuelType')}>
-          <Picker.Item label='Lütfen Seçiniz..' value=' '/>
-          <Picker.Item label='Benzin' value='Benzin'/>
-          <Picker.Item label='Dizel' value='Dizel'/>
-          <Picker.Item label='LPG' value='LPG'/>
-          <Picker.Item label='Elektrikli' value='Elektrikli'/>
-          <Picker.Item label='Hibrit' value='Hibrit'/>
-        </Picker>
-        <TextInput placeholder='Aracın plakasını giriniz: ' onChangeText={setVehicleInformation.bind(this,'numberPlate')}/>
-        <TextInput placeholder='Aracın resminin Url adresini giriniz: ' onChange={setVehicleInformation.bind(this,'pictureUrl')}/>
-        <Text>Araç hangi kategoride?</Text>
-        <Picker selectedValue={setVehicleInformation.bind(this,'categoryId')}>
-          <FlatList>
-            data={data}
-            keyExtractor={(item)=>item.id.toString()}
-            renderItem={({item})=>(
-              <Picker.Item label={item.name} value={item.id}/>
-            )}        
-          </FlatList>
-        </Picker>
-        <Button title='Araç Ekle' onPress={handleAddVehicle}/>
-       {handleAddVehicle()}
-      </View>
-    )
-  }
-
   function RemoveVehicle(){
+    const [removeVehicle] = useRemoveVehicleMutation();
     const {data,isLoading} = useGetAllVehicleQuery();
-    const handleRemove=(vehicleId)=>{
-      useRemoveVehicleMutation(vehicleId)
+    const handleRemove = async (vehicleId) => {
+      Alert.alert(
+        "Araç Silme", 
+        "Bu aracı silmek istediğinizden emin misiniz?", 
+        [
+          {
+            text: "İptal",
+            onPress: () => console.log("Silme işlemi iptal edildi."),
+            style: "cancel"
+          },
+          { text: "OK", onPress: async () => {
+              try {
+                await removeVehicle(vehicleId);
+              } catch (error) {
+                console.error(error);
+              }
+            } 
+          }
+        ]
+      );
     }
+  
     if (isLoading) {
       return <Title>İsLoading...</Title>;
     }
+  
     return(
       <View>
         <FlatList
-        data={data.vehicles}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => {
-          <TouchableOpacity
-            style={styles.container}
-          >
-            <Image source={{ uri: item.pictureUrl }} style={styles.img} />
-            <View style={styles.textContainer}>
-            <Text style={styles.textBrand}>{item.brand}</Text>
-            <Text style={styles.textModel}>{item.model}</Text>
-            <Text style={styles.textPlate}>{item.numberPlate}</Text>
-            <Button style={styles.button} onPress={handleRemove(item.id)}>Sil</Button>
-            </View>
-          </TouchableOpacity>
-      }}/>
+          data={data}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={styles.container} onPress={() => handleRemove(item.id)}>
+              <Image source={{ uri: item.pictureUrl }} style={styles.img} />
+              <View style={styles.textContainer}>
+                <Text style={styles.textBrand}>{item.brand}</Text>
+                <Text style={styles.textModel}>{item.model}</Text>
+                <Text style={styles.textPlate}>{item.numberPlate}</Text>
+                
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     )
   }
@@ -178,24 +107,24 @@ export default function ManageVehiclesScreen() {
     return(
       <View>
         <FlatList
-        data={data.vehicles}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => {
-          <TouchableOpacity
-            style={styles.container}
-          >
-            <Image source={{ uri: item.pictureUrl }} style={styles.img} />
-            <View style={styles.textContainer}>
-            <Text style={styles.textBrand}>{item.brand}</Text>
-            <Text style={styles.textModel}>{item.model}</Text>
-            <Text style={styles.textPlate}>{item.numberPlate}</Text>
-            <Button style={styles.button} onPress={handleUpdate(item.id)}>Güncelle</Button>
-            </View>
-          </TouchableOpacity>
-      }}/>
+          data={data}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={styles.container} onPress={() => handleUpdate(item.id)}>
+              <Image source={{ uri: item.pictureUrl }} style={styles.img} />
+              <View style={styles.textContainer}>
+                <Text style={styles.textBrand}>{item.brand}</Text>
+                <Text style={styles.textModel}>{item.model}</Text>
+                <Text style={styles.textPlate}>{item.numberPlate}</Text>   
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     )
+  
   }
+  
 
 const styles = StyleSheet.create({
   appbar: {
@@ -237,7 +166,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   button:{
-    backgroundColor:'red',
+    color: 'red',
     width: 30,
     height: 30,
   }

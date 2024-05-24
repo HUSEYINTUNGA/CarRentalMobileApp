@@ -17,7 +17,7 @@ import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpac
     function SetLoginInformation(inputIdentifier,enteredValue){
       setModel((currentInputValue)=>{
         return{
-         ...currentInputValue,
+          ...currentInputValue,
           [inputIdentifier]:enteredValue
         }
       })
@@ -55,9 +55,9 @@ import { KeyboardAvoidingView, StyleSheet, Text, View , TextInput, TouchableOpac
           <Text style={styles.textButton}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>
-     </KeyboardAvoidingView>
-     </ImageBackground>
-     
+      </KeyboardAvoidingView>
+      </ImageBackground>
+      
     )
 }
 

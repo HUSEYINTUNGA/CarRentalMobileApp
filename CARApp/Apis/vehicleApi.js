@@ -1,8 +1,7 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import { config } from './config';
 
-export const vehicleApi = createApi({
-  
+export const vehicleApi = createApi({ 
     reducerPath: 'vehicleApi',
     baseQuery: fetchBaseQuery({
         baseUrl: config.baseUrl,
