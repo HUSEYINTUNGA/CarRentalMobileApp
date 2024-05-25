@@ -15,7 +15,7 @@ import AboutMeScreen from './screens/CustomerScreenFiles/AboutMeScreen';
 import CustomerSettingsScreen from './screens/CustomerScreenFiles/CustomerSettingsScreen';
 import AccountingScreen from './screens/AdminScreenFiles/AccountingScreen';
 import ManageCategoriesScreen from './screens/AdminScreenFiles/ManageCategoriesScreen';
-import ManageVehiclesScreen from './screens/AdminScreenFiles/ManageVehicle/ManageVehiclesScreen';
+import ManageVehiclesScreen from './screens/AdminScreenFiles/ManageVehiclesScreen';
 import MessagesCustomersScreen from './screens/AdminScreenFiles/MessagesCustomersScreen';
 import RentalRequestsScreen from './screens/AdminScreenFiles/RentalRequestsScreen';
 import ManageRolesOfCustomersScreen from './screens/AdminScreenFiles/ManageRolesOfCustomersScreen';

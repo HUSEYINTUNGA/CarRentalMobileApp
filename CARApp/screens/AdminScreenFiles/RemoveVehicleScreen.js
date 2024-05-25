@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, FlatList, TouchableOpacity, Image, View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useRemoveVehicleMutation, useGetAllVehicleQuery } from '../../../Apis/vehicleApi';
+import { useRemoveVehicleMutation, useGetAllVehicleQuery } from '../../Apis/vehicleApi';
 
 export default function RemoveVehicleScreen() {
     const [removeVehicle] = useRemoveVehicleMutation();

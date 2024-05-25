@@ -7,7 +7,7 @@ export default function AccountingScreen() {
       <Text>AccountingScreen</Text>
     </View>
 
-    //Toplam gelir , kiradaki araç sayısı , toplam araç sayısı, bekleyen araç sayısı
+    
   )
 }
 
