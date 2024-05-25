@@ -15,12 +15,15 @@ import AboutMeScreen from './screens/CustomerScreenFiles/AboutMeScreen';
 import CustomerSettingsScreen from './screens/CustomerScreenFiles/CustomerSettingsScreen';
 import AccountingScreen from './screens/AdminScreenFiles/AccountingScreen';
 import ManageCategoriesScreen from './screens/AdminScreenFiles/ManageCategoriesScreen';
-import ManageVehiclesScreen from './screens/AdminScreenFiles/ManageVehiclesScreen';
+import ManageVehiclesScreen from './screens/AdminScreenFiles/ManageVehicle/ManageVehiclesScreen';
 import MessagesCustomersScreen from './screens/AdminScreenFiles/MessagesCustomersScreen';
 import RentalRequestsScreen from './screens/AdminScreenFiles/RentalRequestsScreen';
 import ManageRolesOfCustomersScreen from './screens/AdminScreenFiles/ManageRolesOfCustomersScreen';
-import ListedVehicleScreen from './screens/AdminScreenFiles/ListedVehicleScreen';
-import UpdateVehicleScreen from './screens/AdminScreenFiles/UpdateVehicleScreen';
+import ListedVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/ListedVehicleScreen';
+import UpdateVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/UpdateVehicleScreen';
+import AddVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/UpdateVehicleScreen';
+import RemoveVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/UpdateVehicleScreen';
+
 import { Provider } from 'react-redux';
 import { store } from './Storage/store';
 
@@ -55,7 +58,9 @@ export default function App() {
         <Stack.Screen name="ManageRoles" component={ManageRolesOfCustomersScreen} options={{headerShown:false}}/>
         <Stack.Screen name="ManageCategories" component={ManageCategoriesScreen} options={{headerShown:false}}/>
         <Stack.Screen name="ListedVehicle" component={ListedVehicleScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="UpdateVehicle" component={UpdateVehicleScreen} options={{headerShown:false}}/>     
+        <Stack.Screen name="UpdateVehicle" component={UpdateVehicleScreen} options={{headerShown:false}}/>    
+        <Stack.Screen name="AddVehicle" component={AddVehicleScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="RemoveVehicle" component={RemoveVehicleScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

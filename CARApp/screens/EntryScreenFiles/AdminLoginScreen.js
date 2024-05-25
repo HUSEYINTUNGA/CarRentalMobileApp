@@ -15,7 +15,7 @@ export default function AdminLoginScreen() {
   function SetLoginInformation(inputIdentifier,enteredValue){
     setModel((currentInputValue)=>{
       return{
-       ...currentInputValue,
+        ...currentInputValue,
         [inputIdentifier]:enteredValue
       }
     })

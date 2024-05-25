@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, FlatList,TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
-import { useGetAllVehicleQuery } from '../../Apis/vehicleApi';
+import { useGetAllVehicleQuery } from '../../../Apis/vehicleApi';
 import{Picker} from'@react-native-picker/picker';
 import { Title } from 'react-native-paper';
 export default function ListedVehicleScreen() {
