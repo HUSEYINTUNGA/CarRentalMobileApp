@@ -33,9 +33,16 @@ export const rentalHistoryApi = createApi({
                 method:'GET'
             })
         }),
+        ConfirmingHistoryRecord:builder.mutation({
+            query:(historyModel)=>({
+                url:`History/ConfirmingHistoryRecord/${historyModel.historyId}`,
+                method:'POST',
+                body:historyModel
+            })
+        })
         
     })
 })
 
-export const {useGetAllHistoryQuery,useCreateHistoryMutation,useGetHistoryByVehicleIdQuery,useGetHistoryByCustomerIdQuery}=rentalHistoryApi
+export const {useGetAllHistoryQuery,useCreateHistoryMutation,useGetHistoryByVehicleIdQuery,useGetHistoryByCustomerIdQuery,useConfirmingHistoryRecordMutation}=rentalHistoryApi
 export default rentalHistoryApi

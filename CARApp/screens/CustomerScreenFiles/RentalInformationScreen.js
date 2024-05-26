@@ -43,7 +43,7 @@ export default function RentalInformationScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
-   appbar: {
+  appbar: {
     backgroundColor:'#9b9b9b',
     height:90,
   },

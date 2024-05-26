@@ -19,10 +19,10 @@ import ManageVehiclesScreen from './screens/AdminScreenFiles/ManageVehiclesScree
 import MessagesCustomersScreen from './screens/AdminScreenFiles/MessagesCustomersScreen';
 import RentalRequestsScreen from './screens/AdminScreenFiles/RentalRequestsScreen';
 import ManageRolesOfCustomersScreen from './screens/AdminScreenFiles/ManageRolesOfCustomersScreen';
-import ListedVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/ListedVehicleScreen';
-import UpdateVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/UpdateVehicleScreen';
-import AddVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/UpdateVehicleScreen';
-import RemoveVehicleScreen from './screens/AdminScreenFiles/ManageVehicle/UpdateVehicleScreen';
+import ListedVehicleScreen from './screens/AdminScreenFiles/ListedVehicleScreen';
+import UpdateVehicleScreen from './screens/AdminScreenFiles/UpdateVehicleScreen';
+import AddVehicleScreen from './screens/AdminScreenFiles/UpdateVehicleScreen';
+import RemoveVehicleScreen from './screens/AdminScreenFiles/UpdateVehicleScreen';
 
 import { Provider } from 'react-redux';
 import { store } from './Storage/store';

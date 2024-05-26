@@ -7,7 +7,7 @@ export default function AccountingScreen() {
       <Text>AccountingScreen</Text>
     </View>
 
-    
+    //Muhasebe işlemleri
   )
 }
 

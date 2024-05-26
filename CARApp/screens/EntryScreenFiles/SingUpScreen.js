@@ -14,8 +14,8 @@ export default function SingUpScreen() {
   const [data, setData] = useState(false);
   const handleSingUp = async () => {
     createCustomer({ CustomerEmail: email, CustomerPassword: password, CustomerName: name, CustomerPhone: phone }).then((value) => {setData(value)});
-             
-    if (value.data !== false)
+          
+    if (data !== false)
     {
       Alert.alert("Kayıt başarılı. Bizi tercih ettiğiniz için teşekkür ederiz.");
       navigation.navigate('EntryType');
@@ -49,7 +49,7 @@ export default function SingUpScreen() {
           </TouchableOpacity>
         </View>
     </KeyboardAvoidingView>
-   </ImageBackground>
+  </ImageBackground>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Image, Alert } from 'react-native';
-import { useGetVehiclesByVehicleIdQuery, useUpdateVehicleMutation } from '../../../Apis/vehicleApi';
+import { useGetVehiclesByVehicleIdQuery, useUpdateVehicleMutation } from '../../Apis/vehicleApi';
 
 export default function UpdateVehicleScreen({ route }) {
     const { vehicleId } = route.params;
@@ -32,6 +32,7 @@ export default function UpdateVehicleScreen({ route }) {
             <Text style={styles.text}>{data.fuelType}</Text>
             <Text style={styles.text}>{data.numberPlate}</Text>
             <Text style={styles.text}>{data.isActive}</Text>
+            <Text style={styles.text}>{data.categoryName}</Text>
             <TextInput
                 placeholder={data.price.toString()}
                 value={price}
