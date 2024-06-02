@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View ,FlatList} from 'react-native'
 import React from 'react'
 import {useGetAllHistoryQuery} from '../../Apis/rentalHistoryApi'
 export default function RentalRequestsScreen() {

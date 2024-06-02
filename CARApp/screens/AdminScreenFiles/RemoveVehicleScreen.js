@@ -7,8 +7,8 @@ export default function RemoveVehicleScreen() {
     const [removeVehicle] = useRemoveVehicleMutation();
     const { data, isLoading } = useGetAllVehicleQuery();
     const navigation = useNavigation();
-    const handleUpdate =(vehicleId) => navigation.navigate('UpdateVehicle', {vehicleId: vehicleId})
-    const handleRemove = async (vehicleId) => {
+    const handleUpdate =(id) => navigation.navigate('UpdateVehicle', {vehicleId: id})
+    const handleRemove = async (id) => {
         Alert.alert(
             "Araç Silme",
             "Bu aracı silmek istediğinizden emin misiniz?",
@@ -22,7 +22,7 @@ export default function RemoveVehicleScreen() {
                     text: "OK",
                     onPress: async () => {
                         try {
-                            await removeVehicle(vehicleId);
+                            await removeVehicle(id);
                         } catch (error) {
                             console.error(error);
                         }

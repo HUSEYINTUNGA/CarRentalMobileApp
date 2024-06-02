@@ -21,8 +21,8 @@ import RentalRequestsScreen from './screens/AdminScreenFiles/RentalRequestsScree
 import ManageRolesOfCustomersScreen from './screens/AdminScreenFiles/ManageRolesOfCustomersScreen';
 import ListedVehicleScreen from './screens/AdminScreenFiles/ListedVehicleScreen';
 import UpdateVehicleScreen from './screens/AdminScreenFiles/UpdateVehicleScreen';
-import AddVehicleScreen from './screens/AdminScreenFiles/UpdateVehicleScreen';
-import RemoveVehicleScreen from './screens/AdminScreenFiles/UpdateVehicleScreen';
+import AddVehicleScreen from './screens/AdminScreenFiles/AddVehicleScreen';
+import RemoveVehicleScreen from './screens/AdminScreenFiles/RemoveVehicleScreen';
 
 import { Provider } from 'react-redux';
 import { store } from './Storage/store';
@@ -37,7 +37,7 @@ export default function App() {
     <Provider store={store}>
     <NavigationContainer style={styles.container}>
       {/* <Stack.Navigator initialRouteName='AboutMe'> */}
-    <Stack.Navigator initialRouteName="ManageVehicles">
+    <Stack.Navigator initialRouteName="Manage">
       {/* <Stack.Navigator initialRouteName="EntryType"> */}
         <Stack.Screen name="EntryType" component={EntryTypeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{headerShown:false}}/>

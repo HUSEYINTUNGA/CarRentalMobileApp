@@ -28,9 +28,9 @@ export const vehicleApi = createApi({
         }),
         UpdateVehicle:builder.mutation({
             query:(model)=>({
-                url:`Vehicle/UpDateVehicle${model.VehicleId}`,
+                url:`Vehicle/UpdateVehicle/${model.id}`,
                 method:'PUT',
-                body:model.vehicleModel
+                body:model
             })
         }),
         GetVehiclesByVehicleId:builder.query({

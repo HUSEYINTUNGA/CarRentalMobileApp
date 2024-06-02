@@ -4,13 +4,14 @@ import { useGetVehiclesByVehicleIdQuery, useUpdateVehicleMutation } from '../../
 
 export default function UpdateVehicleScreen({ route }) {
     const { vehicleId } = route.params;
+    console.log(vehicleId);
     const { data, isLoading } = useGetVehiclesByVehicleIdQuery(vehicleId);
     const [updateVehicle] = useUpdateVehicleMutation();
     const [price, setPrice] = useState('');
 
     const handleUpdate = async () => {
         try {
-            await updateVehicle({ ...data, price });
+            await updateVehicle({ id: vehicleId, price: price });
             Alert.alert('Başarılı', 'Araç başarıyla güncellendi.');
         } catch (error) {
             console.error(error);

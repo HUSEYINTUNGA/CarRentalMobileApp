@@ -2,11 +2,13 @@ import { StyleSheet, Text, View, FlatList,TouchableOpacity, Image } from 'react-
 import React, { useState } from 'react'
 import { useGetAllVehicleQuery } from '../../Apis/vehicleApi';
 import{Picker} from'@react-native-picker/picker';
-import { Title } from 'react-native-paper';
+import { Title,Appbar } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 export default function ListedVehicleScreen() {
   const {data,isLoading} = useGetAllVehicleQuery();
   const [selectedOption, setSelectedOption] = useState('');
-  
+  const navigation = useNavigation();
+
     const handleOptionChange = (value) => {
       setSelectedOption(value);
     };
@@ -19,9 +21,17 @@ export default function ListedVehicleScreen() {
       }
       
     };
+    const handleAdd=()=>{navigation.navigate('AddVehicle');};
+    const handleRemove=()=>{navigation.navigate('RemoveVehicle');};
+
   
     return (
       <View>
+        <Appbar.Header style={styles.appbar}>
+          <Appbar.Content title="Araç Listeleme" />
+          <Appbar.Action icon="car" onPress={()=>handleAdd(navigation)} />    
+          <Appbar.Action icon="minus" onPress={()=>handleRemove(navigation)} />   
+        </Appbar.Header>
         <Picker
           selectedValue={selectedOption}
           onValueChange={handleOptionChange}
@@ -119,42 +129,51 @@ export default function ListedVehicleScreen() {
     },
     container: {
       flex: 1,
-      backgroundColor: '#cecece',
+      backgroundColor: '#f5f5f5',
       padding: 16,
       marginBottom: 10,
       borderRadius: 10,
       flexDirection: 'row',
       alignItems: 'center',
       margin:6,
-      
-    },
-    textContainer: {
+  },
+  textContainer: {
       marginLeft: 16,
       flex: 1,
-    },
-    textBrand: {
+  },
+  textBrand: {
       fontWeight: 'bold',
       fontSize: 16,
-    },
-    textModel: {
+      color: '#333',
+  },
+  textModel: {
       fontSize: 14,
       color: '#555',
-    },
-    textPrice: {
+  },
+  textPrice: {
       fontWeight: 'bold',
       fontSize: 20,
-      color: 'red',
-    },
-    textPlate: {
+      color: '#007BFF',
+  },
+  textPlate: {
       fontSize: 14,
       color: '#555',
       marginTop: 10,
-    },
-    img: {
+  },
+  img: {
       width: 150,
       height: 100,
       borderRadius: 10,
       borderWidth: 1,
+      borderColor: '#ddd',
       marginLeft: 10,
-    },
+  },
+  picker: {
+      height: 50,
+      width: '100%',
+      borderColor: '#007BFF',
+      borderWidth: 1,
+      borderRadius: 5,
+      marginBottom: 20,
+  },
   });

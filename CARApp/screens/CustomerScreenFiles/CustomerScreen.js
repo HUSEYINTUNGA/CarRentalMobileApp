@@ -1,6 +1,6 @@
 
 import { StyleSheet, View,Text, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { useGetAllCategoryQuery } from '../../Apis/categoryApi';
 import { Card, Title,Appbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -38,7 +38,7 @@ export default function CustomerScreen({route}) {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Card style={styles.card} onPress={() => navigation.navigate('ListedVehicles',
-           { categoryId: item.id , category:item.categoryName,userId:userId})}>
+            { categoryId: item.id , category:item.categoryName,userId:userId})}>
             <Card.Content>
               <Title style={styles.appbarTitle}>{item.categoryName}</Title>
               <Text style={styles.appbarText}>{item.categoryName} Kategorisindeki araçları görüntülemek için tıkla.</Text>
