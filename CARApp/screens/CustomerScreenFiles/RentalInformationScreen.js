@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useCreateHistoryMutation } from '../../Apis/rentalHistoryApi';
+import { Appbar} from 'react-native-paper';
+
 export default function RentalInformationScreen({ route }) {
   const { carId, userId } = route.params;
   const [startDateTime, setStartDateTime] = useState('');
@@ -18,7 +20,7 @@ export default function RentalInformationScreen({ route }) {
   return (
     <View>
       <Appbar.Header style={styles.appbar}>    
-      <Appbar.Content title={category}/>
+      <Appbar.Content title={'Kiralama Bilgileri'}/>
       <Appbar.Action icon="email" onPress={() => handleFeedBack(navigation)} />
       <Appbar.Action icon="login" onPress={() => handleLogin(navigation)} />
       <Appbar.Action icon="cog" onPress={() => handleSettings(navigation)} />

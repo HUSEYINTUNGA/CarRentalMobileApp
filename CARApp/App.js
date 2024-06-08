@@ -37,7 +37,7 @@ export default function App() {
     <Provider store={store}>
     <NavigationContainer style={styles.container}>
       {/* <Stack.Navigator initialRouteName='AboutMe'> */}
-    <Stack.Navigator initialRouteName="Manage">
+    <Stack.Navigator initialRouteName="EntryType">
       {/* <Stack.Navigator initialRouteName="EntryType"> */}
         <Stack.Screen name="EntryType" component={EntryTypeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{headerShown:false}}/>

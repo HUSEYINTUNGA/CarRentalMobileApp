@@ -35,7 +35,8 @@ export default function ListedVehicleScreen() {
         <Picker
           selectedValue={selectedOption}
           onValueChange={handleOptionChange}
-        >
+        > 
+          <Text>Listelemek istediğiniz araçların türünü seçiniz</Text>
           <Picker.Item label="Lütfen Seçiniz.." value="  " />
           <Picker.Item label="Aktif Araçları Görüntüle" value="active" />
           <Picker.Item label="Kiradaki Araçları Görüntüle" value="rental" />

@@ -10,32 +10,32 @@ export const rentalHistoryApi = createApi({
     endpoints:(builder)=>({
         GetAllHistory:builder.query({
             query:()=>({
-                url:'History/GetAllHistory',
+                url:'RentalHistory/GetAllHistory',
                 method:'GET'
             })
         }),
         CreateHistory:builder.mutation({
             query:(historyModel)=>({
-                url:'History/CreateHistory',
+                url:'RentalHistory/CreateHistory',
                 method:'POST',
                 body:historyModel
             })
         }),
         GetHistoryByVehicleId:builder.query({
             query:(vehicleId)=>({
-                url:`History/GetHistoryByVehicleId/${vehicleId}`,
+                url:`RentalHistory/GetHistoryByVehicleId/${vehicleId}`,
                 method:'GET'
             })
         }),
         GetHistoryByCustomerId:builder.query({
             query:(customerId)=>({
-                url:`History/GetHistoryByCustomerId/${customerId}`,
+                url:`RentalHistory/GetHistoryByCustomerId/${customerId}`,
                 method:'GET'
             })
         }),
         ConfirmingHistoryRecord:builder.mutation({
             query:(historyModel)=>({
-                url:`History/ConfirmingHistoryRecord/${historyModel.historyId}`,
+                url:`RentalHistory/ConfirmingHistoryRecord/${historyModel.historyId}`,
                 method:'POST',
                 body:historyModel
             })

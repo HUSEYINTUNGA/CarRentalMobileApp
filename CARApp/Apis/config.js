@@ -1,3 +1,3 @@
 export const config = {
-    baseUrl: 'https://ec97-88-236-115-244.ngrok-free.app/api/'
+    baseUrl: 'https://6993-88-236-117-121.ngrok-free.app/api/'
 }

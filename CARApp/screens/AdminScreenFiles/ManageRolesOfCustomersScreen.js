@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,FlatList,TouchableOpacity } from 'react-native'
 import React from 'react'
 import {useSetRolesOfCustomerMutation,useGetAllCustomerQuery} from'../../Apis/CustomerApi';
 export default function ManageRolesOfCustomersScreen() {
